@@ -5,21 +5,27 @@ const userData = require('./userData.json');
 const blogPostData = require('./blogPostData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+    console.log('----- SEEDING DATABASE STARTED -----\n');
 
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
+    await sequelize.sync({ force: true });
+    console.log('----- DATABASE SYNCED -----\n');
 
-  for (const blog of blogPostData) {
-    await BlogPost.create({
-      ...blog,
-      user_id: users[Math.floor(Math.random() * users.length)].id,
+    const users = await User.bulkCreate(userData, {
+      individualHooks: true,
+      returning: true,
     });
-  }
-
-  process.exit(0);
+    console.log(`----- ${users.length} USERS SEEDED -----\n`);
+  
+    for (const blog of blogPostData) {
+      await BlogPost.create({
+        ...blog,
+        user_id: users[Math.floor(Math.random() * users.length)].id,
+      });
+    }
+    console.log(`----- ${blogPostData.length} BLOG POSTS SEEDED -----\n`);
+  
+    console.log('----- SEEDING DATABASE COMPLETED -----\n');
+    process.exit(0);
 };
 
 seedDatabase();
