@@ -2,17 +2,17 @@ const userData = [
     {
       "name": "test",
       "email": "test@bestmail.com",
-      "password": "password123"
+      "password": "Password1!"
     },
     {
       "name": "Jerry",
       "email": "jerry@bestmail.com",
-      "password": "password123"
+      "password": "Password1!"
     },
     {
       "name": "Larry",
       "email": "lary@bestmail.com",
-      "password": "password123"
+      "password": "Password1!"
     }
 ];
 

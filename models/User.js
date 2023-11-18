@@ -33,6 +33,20 @@ User.init(
       allowNull: false,
       validate: {
         len: [8],
+        isStrongPassword: function(value) {
+          if (!/[A-Z]/.test(value)) {
+            throw new Error("Password must contain at least one uppercase letter");
+          }
+          if (!/[a-z]/.test(value)) {
+            throw new Error("Password must contain at least one lowercase letter");
+          }
+          if (!/[0-9]/.test(value)) {
+            throw new Error("Password must contain at least one number");
+          }
+          if (!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(value)) {
+            throw new Error("Password must contain at least one special character");
+          }
+        }
       },
     },
   },
